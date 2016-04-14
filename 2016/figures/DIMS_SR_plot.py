@@ -7,21 +7,35 @@ import seaborn as sns
 sns.set_style("ticks", rc={'font.family': 'Helvetica'})
 sns.set_context("paper")
 
-def fun (del_phi, phi_0):
-    if del_phi > 0:
-        return np.exp(-np.square(np.absolute(del_phi/phi_0)))
+x = np.linspace(-10**-3,10**-3,100)
+
+def fun1(x):
+    if x > 0:
+        return np.exp(-np.square(np.absolute(x/10**-4)))
     else:
         return 1
 
-vfun = np.vectorize(fun)
+def fun2(x):
+    if x > 0:
+        return np.exp(-np.square(np.absolute(x/30**-4)))
+    else:
+        return 1
 
-x = np.linspace(-1e-7,1e-7,100)
-y1 = vfun(x,1e-4)
-y2 = vfun(x,1e-5)
-y3 = vfun(x,1e-6)
+def fun3(x):
+    if x > 0:
+        return np.exp(-np.square(np.absolute(x/50**-4)))
+    else:
+        return 1
+
+vfun1 = np.vectorize(fun1)
+vfun2 = np.vectorize(fun2)
+vfun3 = np.vectorize(fun3)
+
+y1 = vfun1
+#y2 = vfun2(x)
+#y3 = vfun3(x)
 
 plt.plot(x,y1)
-plt.plot(x,y2)
-plt.plot(x,y3)
-
+#plt.plot(x,y2)
+#plt.plot(x,y3)
 plt.show()
